@@ -11,7 +11,7 @@ namespace Core
 
         public override string ToString()
         {
-            return $"Втрата ваги: {WeightLost} кг, Тренування: {CompletedWorkouts}";
+            return $"Втрата ваги: {WeightLost} кг, Кількість тренувань: {CompletedWorkouts}";
         }
     }
 }
