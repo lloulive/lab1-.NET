@@ -2,7 +2,7 @@
 
 namespace Core
 {
-    public class Workout
+    public class Workout : Activity
     {
         public string WorkoutType { get; set; }
         public int DurationMinutes { get; set; }
@@ -13,5 +13,16 @@ namespace Core
         {
             return $"Тренування: {WorkoutType}, Тривалість: {DurationMinutes} хв, Калорії: {CaloriesBurned}";
         }
+
+        public override double CalculateCalories()
+        {
+            return CaloriesBurned;
+        }
+
+        public override void ShowInfo()
+        {
+            System.Console.WriteLine(WorkoutType + " | " + CaloriesBurned + " kcal");
+        }
+
     }
 }

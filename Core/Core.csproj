@@ -41,8 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activity.cs" />
+    <Compile Include="AppController.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="Configuration.cs" />
     <Compile Include="FitnessProgress.cs" />
+    <Compile Include="ITrackable.cs" />
     <Compile Include="Price.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />

@@ -2,7 +2,7 @@
 
 namespace Core
 {
-    public class FitnessProgress
+    public class FitnessProgress : ITrackable
     {
         public double WeightLost { get; set; }
         public int CompletedWorkouts { get; set; }
@@ -13,5 +13,11 @@ namespace Core
         {
             return $"Втрата ваги: {WeightLost} кг, Кількість тренувань: {CompletedWorkouts}";
         }
+
+        public void TrackProgress()
+        {
+            System.Console.WriteLine("Прогрес користувача відстежується");
+        }
+
     }
 }

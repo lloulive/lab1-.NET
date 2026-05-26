@@ -9,23 +9,58 @@ namespace ConsoleUI
 {
     class Program
     {
-
-        static void ChangePrice(Price price) {
-            
+        static void ChangePrice(Price price)
+        {
             price.Value = 999;
-
         }
 
         static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            Console.WriteLine(" EXTENSION METHOD ");
+            Console.WriteLine(" POLYMORPHISM ");
+
+            Activity[] activities =
+            {
+                new Workout()
+                {
+                    Name = "Кардіо",
+                    WorkoutType = "Біг",
+                    CaloriesBurned = 400,
+                    DurationMinutes = 30,
+                    WorkoutDate = DateTime.Now
+                },
+
+                new Workout()
+                {
+                    Name = "Силова",
+                    WorkoutType = "Бокс",
+                    CaloriesBurned = 700,
+                    DurationMinutes = 60,
+                    WorkoutDate = DateTime.Now
+                }
+            };
+
+            foreach (Activity activity in activities)
+            {
+                activity.ShowInfo();
+                Console.WriteLine("Calories: " + activity.CalculateCalories());
+            }
+
+            Console.WriteLine("\n INTERFACE ");
+
+            ITrackable trackedProgress = new FitnessProgress();
+            trackedProgress.TrackProgress();
+
+            Console.WriteLine("\n COMPOSITION ");
+
+            AppController controller = new AppController();
+            controller.ShowConfiguration();
+
+            Console.WriteLine("\n EXTENSION METHOD ");
 
             double calories = 500;
-
             Console.WriteLine(calories.ToCaloriesString());
-
 
             Console.WriteLine("\n WORKOUT MANAGER / FOREACH ");
 
@@ -52,8 +87,7 @@ namespace ConsoleUI
                 Console.WriteLine(item.WorkoutType + " | " + item.CaloriesBurned.ToCaloriesString());
             }
 
-
-            Console.WriteLine("\n DICTIONARY SEARCH ");
+            Console.WriteLine("\n DICTIONARY ");
 
             Dictionary<int, Workout> workoutDictionary = new Dictionary<int, Workout>();
 
@@ -79,21 +113,6 @@ namespace ConsoleUI
             {
                 Console.WriteLine("Знайдено: " + foundWorkout.WorkoutType);
             }
-            else
-            {
-                Console.WriteLine("Тренування не знайдено");
-            }
-
-
-            Console.WriteLine("\n LINQ DICTIONARY ");
-
-            var filteredDictionary = workoutDictionary.Where(w => w.Value.CaloriesBurned > 300);
-
-            foreach (var item in filteredDictionary)
-            {
-                Console.WriteLine(item.Key + " | " + item.Value.WorkoutType + " | " + item.Value.CaloriesBurned.ToCaloriesString());
-            }
-
 
             Console.WriteLine("\n HASHSET ");
 
@@ -108,34 +127,9 @@ namespace ConsoleUI
                 Console.WriteLine(tag);
             }
 
-
-            Console.WriteLine("\n HASHSET INTERSECTION ");
-
-            HashSet<string> firstSet = new HashSet<string>()
-{
-    "Кардіо",
-    "Біг",
-    "Йога"
-};
-
-            HashSet<string> secondSet = new HashSet<string>()
-{
-    "Біг",
-    "Йога",
-    "Бокс"
-};
-
-            firstSet.IntersectWith(secondSet);
-
-            foreach (var item in firstSet)
-            {
-                Console.WriteLine(item);
-            }
-
-            Console.WriteLine(" STRUCT ");
+            Console.WriteLine("\n STRUCT ");
 
             Price price = new Price();
-
             price.Value = 100;
 
             Console.WriteLine("До метода: " + price.Value);
@@ -147,12 +141,12 @@ namespace ConsoleUI
             Console.WriteLine("\n BOXING ");
 
             object obj = 5;
-
             int number = (int)obj;
 
             Console.WriteLine("Object: " + obj);
-
             Console.WriteLine("Unboxed: " + number);
+
+            Console.WriteLine("\n ARRAYLIST VS LIST ");
 
             Stopwatch sw = new Stopwatch();
 
@@ -172,7 +166,6 @@ namespace ConsoleUI
             List<int> list = new List<int>();
 
             sw.Reset();
-
             sw.Start();
 
             for (int i = 0; i < 1000000; i++)
@@ -184,120 +177,15 @@ namespace ConsoleUI
 
             Console.WriteLine("List<int>: " + sw.ElapsedMilliseconds + " ms");
 
-            List<Workout> workouts = new List<Workout>()
-{
-    new Workout(){ WorkoutType="Біг", DurationMinutes=30, CaloriesBurned=300, WorkoutDate=DateTime.Now },
-
-    new Workout(){ WorkoutType="Кардіо", DurationMinutes=50, CaloriesBurned=500, WorkoutDate=DateTime.Now },
-
-    new Workout(){ WorkoutType="Йога", DurationMinutes=40, CaloriesBurned=200, WorkoutDate=DateTime.Now },
-
-    new Workout(){ WorkoutType="Бокс", DurationMinutes=60, CaloriesBurned=650, WorkoutDate=DateTime.Now },
-
-    new Workout(){ WorkoutType="Плавання", DurationMinutes=45, CaloriesBurned=450, WorkoutDate=DateTime.Now },
-
-    new Workout(){ WorkoutType="Велосипед", DurationMinutes=55, CaloriesBurned=480, WorkoutDate=DateTime.Now },
-
-    new Workout(){ WorkoutType="Стретчінг", DurationMinutes=20, CaloriesBurned=150, WorkoutDate=DateTime.Now },
-
-    new Workout(){ WorkoutType="Силова", DurationMinutes=70, CaloriesBurned=700, WorkoutDate=DateTime.Now },
-
-    new Workout(){ WorkoutType="Кросфіт", DurationMinutes=80, CaloriesBurned=750, WorkoutDate=DateTime.Now },
-
-    new Workout(){ WorkoutType="Танці", DurationMinutes=35, CaloriesBurned=320, WorkoutDate=DateTime.Now }
-};
-
-            Console.WriteLine("\n WHERE ");
-
-            var filtered = workouts.Where(w => w.CaloriesBurned > 400);
-
-            foreach (var w in filtered)
-            {
-                Console.WriteLine(w.WorkoutType + " " + w.CaloriesBurned);
-            }
-
-            Console.WriteLine("\n ORDERBY ");
-
-            var sorted = workouts
-                .OrderBy(w => w.WorkoutType)
-                .ThenBy(w => w.DurationMinutes);
-
-            foreach (var w in sorted)
-            {
-                Console.WriteLine(w.WorkoutType + " " + w.DurationMinutes);
-            }
-
-            Console.WriteLine("\n SELECT ");
-
-            var names = workouts.Select(w => w.WorkoutType);
-
-            foreach (var n in names)
-            {
-                Console.WriteLine(n);
-            }
-
-            Console.WriteLine("\n FIRSTORDEFAULT ");
-
-            var first = workouts.FirstOrDefault(w => w.WorkoutType == "Бокс");
-
-            if (first != null)
-            {
-                Console.WriteLine(first.WorkoutType + " знайден");
-            }
-            else
-            {
-                Console.WriteLine("Не знайден");
-            }
-
-            Console.ReadKey();
-
-            // Информация о системе
-            Console.WriteLine(" Інформація о системі ");
+            Console.WriteLine("\n SYSTEM INFO ");
 
             Console.WriteLine("OS Version: " + Environment.OSVersion);
             Console.WriteLine("Machine Name: " + Environment.MachineName);
             Console.WriteLine("64-bit OS: " + Environment.Is64BitOperatingSystem);
 
-            // Память
             long memory = GC.GetTotalMemory(false);
 
             Console.WriteLine("Використання пам'яті: " + memory + " bytes");
-
-            Console.WriteLine("\n Об'єкти ");
-
-            // User
-            User user = new User()
-            {
-                Name = "Арсеній",
-                Age = 19,
-                Weight = 90,
-                IsPremium = true
-            };
-
-            // Workout
-            Workout workout = new Workout()
-            {
-                WorkoutType = "Кардіо",
-                DurationMinutes = 40,
-                CaloriesBurned = 450,
-                WorkoutDate = DateTime.Now
-            };
-
-            // Progress
-            FitnessProgress progress = new FitnessProgress()
-            {
-                WeightLost = 3.2,
-                CompletedWorkouts = 15,
-                LastUpdate = DateTime.Now,
-                GoalAchieved = false
-            };
-
-            // Вывод
-            Console.WriteLine(user);
-
-            Console.WriteLine(workout);
-
-            Console.WriteLine(progress);
 
             Console.ReadKey();
         }
