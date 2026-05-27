@@ -1,181 +1,118 @@
-﻿using System;
-using System.Collections;
+﻿using Core;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.IO;
 using System.Linq;
-using Core;
+using System.Resources;
+using System.Xml.Linq;
 
 namespace ConsoleUI
 {
     class Program
     {
-        static void ChangePrice(Price price)
-        {
-            price.Value = 999;
-        }
-
         static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            Console.WriteLine(" POLYMORPHISM ");
+            Console.WriteLine(" LAB 5: JSON SERIALIZATION ");
 
-            Activity[] activities =
+            List<Workout> workouts = new List<Workout>()
             {
                 new Workout()
                 {
-                    Name = "Кардіо",
                     WorkoutType = "Біг",
-                    CaloriesBurned = 400,
                     DurationMinutes = 30,
+                    CaloriesBurned = 300,
                     WorkoutDate = DateTime.Now
                 },
 
                 new Workout()
                 {
-                    Name = "Силова",
                     WorkoutType = "Бокс",
-                    CaloriesBurned = 700,
                     DurationMinutes = 60,
+                    CaloriesBurned = 700,
+                    WorkoutDate = DateTime.Now
+                },
+
+                new Workout()
+                {
+                    WorkoutType = "Йога",
+                    DurationMinutes = 40,
+                    CaloriesBurned = 200,
                     WorkoutDate = DateTime.Now
                 }
             };
 
-            foreach (Activity activity in activities)
+            string jsonPath = "workouts.json";
+
+            string json = JsonConvert.SerializeObject(workouts, Formatting.Indented);
+
+            File.WriteAllText(jsonPath, json);
+
+            Console.WriteLine("JSON файл збережено");
+
+            Console.WriteLine("\n JSON DESERIALIZATION ");
+
+            if (File.Exists(jsonPath))
             {
-                activity.ShowInfo();
-                Console.WriteLine("Calories: " + activity.CalculateCalories());
+                try
+                {
+                    string loadedJson = File.ReadAllText(jsonPath);
+
+                    List<Workout> loadedWorkouts =
+                        JsonConvert.DeserializeObject<List<Workout>>(loadedJson);
+
+                    foreach (var item in loadedWorkouts)
+                    {
+                        Console.WriteLine(item.WorkoutType + " | " + item.CaloriesBurned + " kcal");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Помилка читання JSON: " + ex.Message);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Файл JSON не знайдено");
             }
 
-            Console.WriteLine("\n INTERFACE ");
+            Console.WriteLine("\n XML EXPORT ");
 
-            ITrackable trackedProgress = new FitnessProgress();
-            trackedProgress.TrackProgress();
+            XDocument xml =
+                new XDocument(
+                    new XElement("Workouts",
 
-            Console.WriteLine("\n COMPOSITION ");
+                        workouts
+                        .Where(w => w.CaloriesBurned > 300)
+                        .Select(w =>
 
-            AppController controller = new AppController();
-            controller.ShowConfiguration();
+                            new XElement("Workout",
 
-            Console.WriteLine("\n EXTENSION METHOD ");
+                                new XElement("Type", w.WorkoutType),
+                                new XElement("DurationMinutes", w.DurationMinutes),
+                                new XElement("CaloriesBurned", w.CaloriesBurned),
+                                new XElement("WorkoutDate", w.WorkoutDate)
+                            )
+                        )
+                    )
+                );
 
-            double calories = 500;
-            Console.WriteLine(calories.ToCaloriesString());
+            string xmlPath = "workouts.xml";
 
-            Console.WriteLine("\n WORKOUT MANAGER / FOREACH ");
+            xml.Save(xmlPath);
 
-            WorkoutManager manager = new WorkoutManager();
+            Console.WriteLine("XML файл збережено");
 
-            manager.AddWorkout(new Workout()
+            Console.WriteLine("\n IDisposable / USING ");
+
+            using (LogResourceManager rm = new LogResourceManager("log.txt"))
             {
-                WorkoutType = "Біг",
-                DurationMinutes = 30,
-                CaloriesBurned = 300,
-                WorkoutDate = DateTime.Now
-            });
-
-            manager.AddWorkout(new Workout()
-            {
-                WorkoutType = "Бокс",
-                DurationMinutes = 60,
-                CaloriesBurned = 650,
-                WorkoutDate = DateTime.Now
-            });
-
-            foreach (var item in manager)
-            {
-                Console.WriteLine(item.WorkoutType + " | " + item.CaloriesBurned.ToCaloriesString());
+                rm.Log("Програма запущена");
+                rm.Log("Дані тренувань збережено у JSON");
+                rm.Log("Дані тренувань експортовано у XML");
             }
-
-            Console.WriteLine("\n DICTIONARY ");
-
-            Dictionary<int, Workout> workoutDictionary = new Dictionary<int, Workout>();
-
-            workoutDictionary.Add(1, new Workout()
-            {
-                WorkoutType = "Кардіо",
-                DurationMinutes = 50,
-                CaloriesBurned = 500,
-                WorkoutDate = DateTime.Now
-            });
-
-            workoutDictionary.Add(2, new Workout()
-            {
-                WorkoutType = "Йога",
-                DurationMinutes = 40,
-                CaloriesBurned = 200,
-                WorkoutDate = DateTime.Now
-            });
-
-            Workout foundWorkout;
-
-            if (workoutDictionary.TryGetValue(1, out foundWorkout))
-            {
-                Console.WriteLine("Знайдено: " + foundWorkout.WorkoutType);
-            }
-
-            Console.WriteLine("\n HASHSET ");
-
-            HashSet<string> tags = new HashSet<string>();
-
-            tags.Add("Кардіо");
-            tags.Add("Біг");
-            tags.Add("Кардіо");
-
-            foreach (var tag in tags)
-            {
-                Console.WriteLine(tag);
-            }
-
-            Console.WriteLine("\n STRUCT ");
-
-            Price price = new Price();
-            price.Value = 100;
-
-            Console.WriteLine("До метода: " + price.Value);
-
-            ChangePrice(price);
-
-            Console.WriteLine("Після метода: " + price.Value);
-
-            Console.WriteLine("\n BOXING ");
-
-            object obj = 5;
-            int number = (int)obj;
-
-            Console.WriteLine("Object: " + obj);
-            Console.WriteLine("Unboxed: " + number);
-
-            Console.WriteLine("\n ARRAYLIST VS LIST ");
-
-            Stopwatch sw = new Stopwatch();
-
-            ArrayList arrayList = new ArrayList();
-
-            sw.Start();
-
-            for (int i = 0; i < 1000000; i++)
-            {
-                arrayList.Add(i);
-            }
-
-            sw.Stop();
-
-            Console.WriteLine("ArrayList: " + sw.ElapsedMilliseconds + " ms");
-
-            List<int> list = new List<int>();
-
-            sw.Reset();
-            sw.Start();
-
-            for (int i = 0; i < 1000000; i++)
-            {
-                list.Add(i);
-            }
-
-            sw.Stop();
-
-            Console.WriteLine("List<int>: " + sw.ElapsedMilliseconds + " ms");
 
             Console.WriteLine("\n SYSTEM INFO ");
 
