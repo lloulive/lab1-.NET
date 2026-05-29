@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36121.58 d17.14
+VisualStudioVersion = 17.14.36121.58
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project_ArseniiTieliepniev", "Project_ArseniiTieliepniev\Project_ArseniiTieliepniev.vcxproj", "{FCC28A18-A709-45A9-B25C-84578B565711}"
 EndProject
@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleUI", "ConsoleUI\Cons
 	ProjectSection(ProjectDependencies) = postProject
 		{6E038BC0-ED4E-4FFF-BDD1-4CB9BDFA572C} = {6E038BC0-ED4E-4FFF-BDD1-4CB9BDFA572C}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsUI", "WinFormsUI\WinFormsUI.csproj", "{A58691D8-7AC0-4EB2-813B-1E72B3262AF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +60,18 @@ Global
 		{2C27D9A2-7428-44E2-8D79-2246F34592A4}.Release|x64.Build.0 = Release|Any CPU
 		{2C27D9A2-7428-44E2-8D79-2246F34592A4}.Release|x86.ActiveCfg = Release|Any CPU
 		{2C27D9A2-7428-44E2-8D79-2246F34592A4}.Release|x86.Build.0 = Release|Any CPU
+		{A58691D8-7AC0-4EB2-813B-1E72B3262AF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A58691D8-7AC0-4EB2-813B-1E72B3262AF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A58691D8-7AC0-4EB2-813B-1E72B3262AF7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A58691D8-7AC0-4EB2-813B-1E72B3262AF7}.Debug|x64.Build.0 = Debug|Any CPU
+		{A58691D8-7AC0-4EB2-813B-1E72B3262AF7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A58691D8-7AC0-4EB2-813B-1E72B3262AF7}.Debug|x86.Build.0 = Debug|Any CPU
+		{A58691D8-7AC0-4EB2-813B-1E72B3262AF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A58691D8-7AC0-4EB2-813B-1E72B3262AF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A58691D8-7AC0-4EB2-813B-1E72B3262AF7}.Release|x64.ActiveCfg = Release|Any CPU
+		{A58691D8-7AC0-4EB2-813B-1E72B3262AF7}.Release|x64.Build.0 = Release|Any CPU
+		{A58691D8-7AC0-4EB2-813B-1E72B3262AF7}.Release|x86.ActiveCfg = Release|Any CPU
+		{A58691D8-7AC0-4EB2-813B-1E72B3262AF7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
