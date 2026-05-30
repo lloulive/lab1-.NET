@@ -42,20 +42,34 @@
             Grid.Column="0"
             Margin="10">
 
-            <Button x:Name="btnAdd" Content="Додати"/>
-            <Button x:Name="btnEdit" Content="Редагувати"/>
-            <Button x:Name="btnDelete" Content="Видалити"/>
+            <Button x:Name="btnAdd"
+        Content="Додати"
+        Command="{Binding AddCommand}"/>
+
+            <Button x:Name="btnEdit"
+        Content="Редагувати"
+        Command="{Binding EditCommand}"/>
+
+            <Button x:Name="btnDelete"
+        Content="Видалити"
+        Command="{Binding DeleteCommand}"/>
+
+            <Button x:Name="btnSave"
+        Content="Зберегти"
+        Command="{Binding SaveCommand}"/>
 
         </StackPanel>
 
         <DataGrid
-            x:Name="workoutsGrid"
-            Grid.Row="1"
-            Grid.Column="1"
-            Margin="10"
-            AutoGenerateColumns="False"
-            IsReadOnly="True"
-            SelectionMode="Single">
+    x:Name="workoutsGrid"
+    Grid.Row="1"
+    Grid.Column="1"
+    Margin="10"
+    AutoGenerateColumns="False"
+    IsReadOnly="True"
+    SelectionMode="Single"
+    ItemsSource="{Binding Workouts}"
+    SelectedItem="{Binding SelectedWorkout}">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Тип" Binding="{Binding WorkoutType}" Width="*"/>
