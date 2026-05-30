@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleUI", "ConsoleUI\Cons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsUI", "WinFormsUI\WinFormsUI.csproj", "{A58691D8-7AC0-4EB2-813B-1E72B3262AF7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFUI", "WPFUI\WPFUI.csproj", "{0B40F664-C627-487A-953A-F30DB94884F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +74,18 @@ Global
 		{A58691D8-7AC0-4EB2-813B-1E72B3262AF7}.Release|x64.Build.0 = Release|Any CPU
 		{A58691D8-7AC0-4EB2-813B-1E72B3262AF7}.Release|x86.ActiveCfg = Release|Any CPU
 		{A58691D8-7AC0-4EB2-813B-1E72B3262AF7}.Release|x86.Build.0 = Release|Any CPU
+		{0B40F664-C627-487A-953A-F30DB94884F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B40F664-C627-487A-953A-F30DB94884F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B40F664-C627-487A-953A-F30DB94884F7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0B40F664-C627-487A-953A-F30DB94884F7}.Debug|x64.Build.0 = Debug|Any CPU
+		{0B40F664-C627-487A-953A-F30DB94884F7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0B40F664-C627-487A-953A-F30DB94884F7}.Debug|x86.Build.0 = Debug|Any CPU
+		{0B40F664-C627-487A-953A-F30DB94884F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B40F664-C627-487A-953A-F30DB94884F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B40F664-C627-487A-953A-F30DB94884F7}.Release|x64.ActiveCfg = Release|Any CPU
+		{0B40F664-C627-487A-953A-F30DB94884F7}.Release|x64.Build.0 = Release|Any CPU
+		{0B40F664-C627-487A-953A-F30DB94884F7}.Release|x86.ActiveCfg = Release|Any CPU
+		{0B40F664-C627-487A-953A-F30DB94884F7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
